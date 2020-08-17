@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "643723211354",
+    "firebase_url": "https://ralohub-15dfa.firebaseio.com",
+    "project_id": "ralohub-15dfa",
+    "storage_bucket": "ralohub-15dfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643723211354:android:c569c0f29838b243f2de63",
+        "android_client_info": {
+          "package_name": "com.ralhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643723211354-e1p64iancih3uq9j6jukn8dp1avva1qh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ralhub",
+            "certificate_hash": "e125fadee3e67aba33e8707b078359a78804a12d"
+          }
+        },
+        {
+          "client_id": "643723211354-588h28ovspqab85m0ba55jbgofkdilkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE4nsCnmYzB-VBOH9HIofga-WQS2dlnr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643723211354-588h28ovspqab85m0ba55jbgofkdilkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

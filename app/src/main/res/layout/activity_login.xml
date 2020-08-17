@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="164dp"
+        android:src="@drawable/logo_ralhub">
+
+    </ImageView>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="358dp"
+        android:layout_marginRight="30dp"
+        android:hint="전화번호,이메일주소 또는 사용자 이름"
+        tools:ignore="hardcodedtext">
+
+    </com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="406dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="411dp"
+        android:layout_marginRight="30dp"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        tools:ignore="hardcodedtext" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="311dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/radius"
+        android:text="로그인"
+        android:textColor="#ffffff"
+        tools:ignore="hardcodedtext" />
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView"
+        android:layout_width="142dp"
+        android:layout_height="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="540dp"
+        android:layout_marginBottom="432dp"
+        android:text="Facebook으로 로그인"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="hardcodedtext"
+        tools:layout_editor_absoluteY="414dp" />
+
+</RelativeLayout>

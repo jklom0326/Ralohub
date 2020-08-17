@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Ralohub</string>
+    <string name="facebook_app_id">330950878046411</string>
+    <string name="fb_login_protocol_scheme">fb330950878046411</string>
+
+</resources>
