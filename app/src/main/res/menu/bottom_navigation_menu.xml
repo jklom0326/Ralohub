@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:enabled="true"
+        android:title=""/>
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search"
+        android:enabled="true"
+        android:title=""/>
+    <item
+        android:id="@+id/navigation_plus"
+        android:icon="@drawable/ic_plus"
+        android:enabled="true"
+        android:title=""/>
+    <item
+        android:id="@+id/navigation_heart"
+        android:icon="@drawable/ic_heart"
+        android:enabled="true"
+        android:title=""/>
+    <item
+        android:id="@+id/navigation_prfile"
+        android:icon="@drawable/com_facebook_profile_picture_blank_portrait"
+        android:enabled="true"
+        android:title=""/>
 </menu>

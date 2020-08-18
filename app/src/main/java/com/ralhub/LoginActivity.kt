@@ -77,9 +77,4 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this,MainActivity::class.java))
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        finish()
-    }
 }

@@ -33,8 +33,4 @@ class LoginMainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        finish()
-    }
 }
