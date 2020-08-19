@@ -4,5 +4,8 @@
     <string name="fb_login_protocol_scheme">fb330950878046411</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="upload_image">Photo Upload</string>
+    <string name="hint_image_content">Image description</string>
+    <string name="upload_success">Upload success</string>
+    <string name="upload_fail">Upload fail</string>
 </resources>
