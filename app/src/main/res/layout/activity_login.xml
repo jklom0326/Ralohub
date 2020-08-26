@@ -17,21 +17,28 @@
 
     </ImageView>
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filled_text"
+        app:boxBackgroundMode="outline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="358dp"
         android:layout_marginRight="30dp"
-        android:hint="전화번호,이메일주소 또는 사용자 이름"
-        tools:ignore="hardcodedtext">
+        tools:ignore="hardcodedtext"
+        android:hint="전화번호,이메일주소 또는 사용자 이름">
 
-    </com.google.android.material.textfield.TextInputEditText>
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="406dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

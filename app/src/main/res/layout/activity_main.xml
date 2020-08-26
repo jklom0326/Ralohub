@@ -19,6 +19,15 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/logo_ralhub">
             </ImageView>
+
+            <ImageButton
+                android:id="@+id/message_send_button"
+                android:layout_alignParentRight="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_origami">
+            </ImageButton>
+
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout

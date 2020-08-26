@@ -7,4 +7,5 @@
     <color name="colorDivision">#e0e0e0</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorNavIcon">#1d1d1d</color>
+    <color name="loginbackground">#342342</color>
 </resources>

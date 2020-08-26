@@ -56,19 +56,20 @@ class AddPhotoActivity : AppCompatActivity() {
             }
         }
     }
+
     fun contentUpload(){
         // make filename
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "IMAGE_" + timestamp + "_.png"
 
-        var storageRef = storage.reference.child("image").child(imageFileName)
+        val storageRef = storage.reference.child("image").child(imageFileName)
 
 
         //Promise method
         storageRef.putFile(photoUri).continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }.addOnSuccessListener { uri ->
-            var contentDTO = ContentDTO()
+            val contentDTO = ContentDTO()
 
             //Insert downloadUrl of image
             contentDTO.imageUrl = uri.toString()

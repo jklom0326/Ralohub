@@ -6,9 +6,11 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ralhub.chatting.ChattingActivity
 import com.ralhub.navigation.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,6 +20,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(R.layout.activity_main)
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
+
+        lateinit var sendmessagebutton : ImageButton
+
+        sendmessagebutton = findViewById(R.id.message_send_button)
+
+        sendmessagebutton.setOnClickListener {
+            val intent = Intent(applicationContext, ChattingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
