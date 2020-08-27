@@ -20,11 +20,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(R.layout.activity_main)
         bottom_navigation.setOnNavigationItemSelectedListener(this)
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),1)
+        bottom_navigation.selectedItemId = R.id.navigation_home
 
         lateinit var sendmessagebutton : ImageButton
-
         sendmessagebutton = findViewById(R.id.message_send_button)
-
         sendmessagebutton.setOnClickListener {
             val intent = Intent(applicationContext, ChattingActivity::class.java)
             startActivity(intent)
