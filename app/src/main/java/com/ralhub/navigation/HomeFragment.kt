@@ -1,5 +1,6 @@
 package com.ralhub.navigation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +23,14 @@ import kotlinx.android.synthetic.main.item_detail.view.*
 class HomeFragment : Fragment(){
    lateinit var user: FirebaseUser
    lateinit var firestore : FirebaseFirestore
+    lateinit var uid : String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = LayoutInflater.from(activity).inflate(R.layout.fragment_home,container,false)
         firestore = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance().currentUser!!
+        uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
 
         view.detailviewfragment_recyclerview.adapter = DetailRecyclerViewAdapter()
         view.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
@@ -56,27 +60,62 @@ class HomeFragment : Fragment(){
         inner class CustomViewHoler(view: View) : RecyclerView.ViewHolder(view) {
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            var viewHoler = (holder as CustomViewHoler).itemView
+            val viewHoler = (holder as CustomViewHoler).itemView
 
             // UserId
-            viewHoler.detailviewitem_explain_textview.text = contentDTOs[position].userId
+            viewHoler.detailviewitem_profile_textview.text = contentDTOs[position].userId
 
             //Image
-            Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl).into(viewHoler.detailviewitem_profile_imageview_content)
+            Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl).into(viewHoler.detailviewitem_imageview_content)
 
             //Explain of content
-            viewHoler.detailviewitem_explain_textview.text = "Likes" + contentDTOs[position].faviriteCount
+            viewHoler.detailviewitem_explain_textview.text = contentDTOs[position].explain
+
+            //likes
+            viewHoler.detailviewitem_favoritecount_textview.text = "Likes" + contentDTOs[position].faviriteCount
 
             //ProfileImage
             Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl).into(viewHoler.detailviewitem_profile_image)
 
+            // This code is when the button is clicked
+            viewHoler.detailviewitem_favorite_imageview.setOnClickListener{
+                favoriteEvent(position)
+            }
+
+            // This code is when the page is loaded
+            if (contentDTOs[position].favorites.containsKey(uid)){
+                // This is like status
+                viewHoler.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite)
+            }else{
+                // This is unlike status
+                viewHoler.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
+            }
         }
-
-
         override fun getItemCount(): Int {
             return contentDTOs.size
         }
+        fun favoriteEvent(position : Int){
+            val tsDoc = firestore.collection("image").document(contentUidList[position])
+            firestore.runTransaction {
+
+                val contentDTO = it.get(tsDoc).toObject(ContentDTO::class.java)
+
+                if (contentDTO!!.favorites.containsKey(uid)){
+                    // when the button is clicked
+                    contentDTO.faviriteCount = contentDTO.faviriteCount - 1
+                    contentDTO.favorites.remove(uid)
+                }else{
+                    // when the button is not clicked
+                    contentDTO.faviriteCount = contentDTO.faviriteCount + 1
+                    contentDTO.favorites[uid!!] = true
+                }
+                it.set(tsDoc,contentDTO)
+            }
+
+        }
+
 
     }
 }
