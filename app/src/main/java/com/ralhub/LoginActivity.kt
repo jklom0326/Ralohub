@@ -34,18 +34,36 @@ class LoginActivity : AppCompatActivity() {
         checkedTextView.setOnClickListener {
             facebookLogin()
         }
-    }
 
-    fun signinAndSignup(){
-        auth.createUserWithEmailAndPassword(email_text.text.toString(),password_edittext.text.toString()).addOnCompleteListener {
-            if (it.isSuccessful){
-                moveMainPage(it.result?.user)
-            }else if(it.exception?.message.isNullOrEmpty()){
-                
-            }
+        button3.setOnClickListener {
+            signinAndSignup()
         }
     }
 
+    fun signinAndSignup() { auth.createUserWithEmailAndPassword(email_edittext.text.toString(), password_edittext.text.toString())?.addOnCompleteListener{ task ->
+        if (task.isSuccessful) {
+            moveMainPage(task.result?.user)
+        }else {
+            signinEmail()
+        }
+    }
+    }
+    fun signinEmail(){
+        auth.createUserWithEmailAndPassword(email_edittext.text.toString(),password_edittext.text.toString())
+            .addOnCompleteListener {
+                    task ->
+                if(task.isSuccessful){
+                    //login
+                    moveMainPage(task.result?.user)
+                } else if (task.exception?.message.isNullOrEmpty()) {
+                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                } else{
+                    //show the error message
+                    Toast.makeText(this,task.exception?.message,Toast.LENGTH_LONG).show()
+                }
+            }
+
+    }
 
     fun facebookLogin(){
         LoginManager.getInstance()

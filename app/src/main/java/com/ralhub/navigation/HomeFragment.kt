@@ -44,7 +44,9 @@ class HomeFragment : Fragment(){
             firestore.collection("image").orderBy("timestamp").addSnapshotListener{ querySnapshot , firebaseFirestoreException ->
                 contentDTOs.clear()
                 contentUidList.clear()
-                for (snapshot in querySnapshot!!.documents){
+                if(querySnapshot== null) return@addSnapshotListener
+
+                for (snapshot in querySnapshot.documents){
                     var item = snapshot.toObject(ContentDTO::class.java)
                     contentDTOs.add(item!!)
                     contentUidList.add(snapshot.id)
@@ -91,6 +93,14 @@ class HomeFragment : Fragment(){
             }else{
                 // This is unlike status
                 viewHoler.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
+            }
+            viewHoler.detailviewitem_profile_image.setOnClickListener{
+                val fragment = UserFragment()
+                val bundle = Bundle()
+                bundle.putString("destinationUid",contentDTOs[position].uid)
+                bundle.putString("userId",contentDTOs[position].userId)
+                fragment.arguments = bundle
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content,fragment)?.commit()
             }
         }
         override fun getItemCount(): Int {
