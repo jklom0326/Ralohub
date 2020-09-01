@@ -13,6 +13,7 @@ import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 
 
@@ -34,6 +35,18 @@ class LoginActivity : AppCompatActivity() {
             facebookLogin()
         }
     }
+
+    fun signinAndSignup(){
+        auth.createUserWithEmailAndPassword(email_text.text.toString(),password_edittext.text.toString()).addOnCompleteListener {
+            if (it.isSuccessful){
+                moveMainPage(it.result?.user)
+            }else if(it.exception?.message.isNullOrEmpty()){
+                
+            }
+        }
+    }
+
+
     fun facebookLogin(){
         LoginManager.getInstance()
             .logInWithReadPermissions(this, Arrays.asList("public_profile","email"))

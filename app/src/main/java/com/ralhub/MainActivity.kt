@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.ralhub.chatting.ChattingActivity
 import com.ralhub.navigation.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -55,6 +56,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
             R.id.navigation_prfile -> {
                 val userFragment = UserFragment()
+                var bundle = Bundle()
+                var uid = FirebaseAuth.getInstance().currentUser?.uid
+                bundle.putString("destinationUid", uid)
+                userFragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.main_content,userFragment).commit()
                 return true
             }

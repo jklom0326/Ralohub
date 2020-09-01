@@ -85,7 +85,7 @@ class HomeFragment : Fragment(){
             }
 
             // This code is when the page is loaded
-            if (contentDTOs[position].favorites.containsKey(uid)){
+                if (contentDTOs[position].favorites.containsKey(uid)){
                 // This is like status
                 viewHoler.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_favorite)
             }else{
