@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -15,16 +15,49 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전화번호"
+            android:text="이메일"
             tools:ignore="HardcodedText">
         </com.google.android.material.tabs.TabItem>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이메일"
+            android:text="전화번호"
             tools:ignore="HardcodedText" >
         </com.google.android.material.tabs.TabItem>
     </com.google.android.material.tabs.TabLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email_register_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tablayout"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="15dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email_register_password"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email_register_id"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="15dp" />
+
+    <Button
+        android:id="@+id/register_btn"
+        android:text="가입하기"
+        android:layout_below="@+id/email_register_password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>

@@ -14,6 +14,7 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 
@@ -36,33 +37,34 @@ class LoginActivity : AppCompatActivity() {
         }
 
         button3.setOnClickListener {
-            signinAndSignup()
-        }
-    }
-
-    fun signinAndSignup() { auth.createUserWithEmailAndPassword(email_edittext.text.toString(), password_edittext.text.toString())?.addOnCompleteListener{ task ->
-        if (task.isSuccessful) {
-            moveMainPage(task.result?.user)
-        }else {
             signinEmail()
         }
+
     }
+
+
+    fun Signup() { auth.createUserWithEmailAndPassword(email_edittext.text.toString(), password_edittext.text.toString()).addOnCompleteListener{ task ->
+             if (task.isSuccessful) {
+                moveMainPage(task.result?.user)
+             }else {
+                 signinEmail()
+            }
+        }
     }
+
+
     fun signinEmail(){
-        auth.createUserWithEmailAndPassword(email_edittext.text.toString(),password_edittext.text.toString())
-            .addOnCompleteListener {
-                    task ->
-                if(task.isSuccessful){
-                    //login
-                    moveMainPage(task.result?.user)
-                } else if (task.exception?.message.isNullOrEmpty()) {
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
-                } else{
-                    //show the error message
-                    Toast.makeText(this,task.exception?.message,Toast.LENGTH_LONG).show()
+        auth.signInWithEmailAndPassword(email_edittext.text.toString(), password_edittext.text.toString())
+            .addOnCompleteListener { task ->
+
+                if (task.isSuccessful) {
+                    //로그인 성공 및 다음페이지 호출
+                    moveMainPage(auth.currentUser)
+                } else {
+                    //로그인 실패
+                    Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
                 }
             }
-
     }
 
     fun facebookLogin(){
