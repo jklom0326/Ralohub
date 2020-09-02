@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.api.Billing
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
@@ -23,6 +24,7 @@ import com.ralhub.LoginMainActivity
 import com.ralhub.MainActivity
 import kotlinx.android.synthetic.main.fragment_user.view.*
 import com.ralhub.R
+import com.ralhub.model.AlarmDTO
 import com.ralhub.model.ContentDTO
 import com.ralhub.model.FollowDTO
 import kotlinx.android.synthetic.main.activity_main.*
@@ -156,6 +158,7 @@ class UserFragment : Fragment(){
                 // It add follwing third person when a third person do not folloew me
                 followDTO.followingCount = followDTO.followingCount + 1
                 followDTO.followings[uid] = true
+                folloewrAlarm(uid)
             }
             it.set(tsDocFollowing,followDTO)
             return@runTransaction
@@ -179,10 +182,20 @@ class UserFragment : Fragment(){
             }else{
                 followDTO!!.followerCount = followDTO!!.followerCount +1
                 followDTO!!.followers[currentUserUid] = true
+                folloewrAlarm(uid)
             }
             it.set(tsDocFollower,followDTO!!)
             return@runTransaction
         }
+    }
+    fun folloewrAlarm(destinationUid : String){
+        var alarmDTO = AlarmDTO()
+        alarmDTO.destinationUid = destinationUid
+        alarmDTO.userId = auth.currentUser?.email
+        alarmDTO.uid = auth.currentUser?.uid
+        alarmDTO.kind = 2
+        alarmDTO.timestamp =System.currentTimeMillis()
+        FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
     }
 
     fun getProfileImage(){
@@ -200,7 +213,7 @@ class UserFragment : Fragment(){
     inner class UserFragmentRecyclerViewAdpater : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
         init {
-            firestore.collection("image").whereEqualTo("uid",uid).addSnapshotListener{querySnapshot, firebaseFirestoreException ->
+            firestore.collection("images").whereEqualTo("uid",uid).addSnapshotListener{querySnapshot, firebaseFirestoreException ->
                 //sometimes, This code return null of querySnapshot when it signout
                 if(querySnapshot == null) return@addSnapshotListener
                 // Get data

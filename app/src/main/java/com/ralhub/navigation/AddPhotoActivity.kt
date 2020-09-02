@@ -62,7 +62,7 @@ class AddPhotoActivity : AppCompatActivity() {
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName = "IMAGE_" + timestamp + "_.png"
 
-        val storageRef = storage.reference.child("image").child(imageFileName)
+        val storageRef = storage.reference.child("images").child(imageFileName)
 
 
         //Promise method
@@ -86,7 +86,7 @@ class AddPhotoActivity : AppCompatActivity() {
             //Insert timestamp
 //            contentDTO.timestamp = System.currentTimeMillis()
 
-            firestore.collection("image").document().set(contentDTO)
+            firestore.collection("images").document().set(contentDTO)
 
             setResult(Activity.RESULT_OK)
 

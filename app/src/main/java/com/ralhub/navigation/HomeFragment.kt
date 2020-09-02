@@ -1,6 +1,7 @@
 package com.ralhub.navigation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 import com.ralhub.R
+import com.ralhub.model.AlarmDTO
 import com.ralhub.model.ContentDTO
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
@@ -41,7 +43,7 @@ class HomeFragment : Fragment(){
         val contentUidList : ArrayList<String> = arrayListOf()
  
         init {
-            firestore.collection("image").orderBy("timestamp").addSnapshotListener{ querySnapshot , firebaseFirestoreException ->
+            firestore.collection("images").orderBy("timestamp").addSnapshotListener{ querySnapshot , firebaseFirestoreException ->
                 contentDTOs.clear()
                 contentUidList.clear()
                 if(querySnapshot== null) return@addSnapshotListener
@@ -62,7 +64,6 @@ class HomeFragment : Fragment(){
         inner class CustomViewHoler(view: View) : RecyclerView.ViewHolder(view) {
         }
 
-        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHoler = (holder as CustomViewHoler).itemView
 
@@ -102,12 +103,18 @@ class HomeFragment : Fragment(){
                 fragment.arguments = bundle
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content,fragment)?.commit()
             }
+            viewHoler.detailviewitem_comment_imageview.setOnClickListener{
+                var intent = Intent(it.context,CommentActivity::class.java)
+                intent.putExtra("contentUid",contentUidList[position])
+                intent.putExtra("destinationUid",contentDTOs[position].uid)
+                startActivity(intent)
+            }
         }
         override fun getItemCount(): Int {
             return contentDTOs.size
         }
         fun favoriteEvent(position : Int){
-            val tsDoc = firestore.collection("image").document(contentUidList[position])
+            val tsDoc = firestore.collection("images").document(contentUidList[position])
             firestore.runTransaction {
 
                 val contentDTO = it.get(tsDoc).toObject(ContentDTO::class.java)
@@ -120,12 +127,21 @@ class HomeFragment : Fragment(){
                     // when the button is not clicked
                     contentDTO.faviriteCount = contentDTO.faviriteCount + 1
                     contentDTO.favorites[uid!!] = true
+                    favoriteAlarm(contentDTOs[position].uid!!)
                 }
                 it.set(tsDoc,contentDTO)
             }
 
         }
 
-
+        fun favoriteAlarm(destinatiobUid : String){
+            var alarmDTO = AlarmDTO()
+            alarmDTO.destinationUid = destinatiobUid
+            alarmDTO.userId =FirebaseAuth.getInstance().currentUser?.email
+            alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid
+            alarmDTO.kind = 0
+            alarmDTO.timestamp = System.currentTimeMillis()
+            FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+        }
     }
 }

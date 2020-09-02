@@ -35,6 +35,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"/>
         <ImageView
+            android:src="@drawable/ic_chat"
             android:id="@+id/detailviewitem_comment_imageview"
             android:layout_width="35dp"
             android:layout_height="35dp"/>

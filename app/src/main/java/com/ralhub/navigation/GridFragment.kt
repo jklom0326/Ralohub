@@ -29,7 +29,7 @@ class GridFragment : Fragment(){
     inner class UserFragmentRecyclerViewAdpater : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
         init {
-            firestore.collection("image").addSnapshotListener{querySnapshot, firebaseFirestoreException ->
+            firestore.collection("images").addSnapshotListener{querySnapshot, firebaseFirestoreException ->
                 //sometimes, This code return null of querySnapshot when it signout
                 if(querySnapshot == null) return@addSnapshotListener
                 // Get data
